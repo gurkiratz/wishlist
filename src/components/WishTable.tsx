@@ -68,21 +68,16 @@ const TableRow = ({ myWish }: { myWish: Wish }) => {
       [e.target.name]: value,
     }
     setWish(updatedWish)
-
-    setWishes((prevWishes) =>
-      prevWishes.map((el) => (el.id === updatedWish.id ? updatedWish : el))
-    )
   }
 
   function editWish() {
     setIsActive((prevState) => !prevState)
     setWish({
-      ...wish,
       ...myWish,
     })
   }
 
-  function updateWish() {
+  function handleUpdate() {
     setWishes((prevWishes) =>
       prevWishes.map((el) => (el.id === myWish.id ? wish : el))
     )
@@ -97,6 +92,11 @@ const TableRow = ({ myWish }: { myWish: Wish }) => {
     setIsActive(false)
   }
 
+  function handleCancel() {
+    setIsActive(false)
+    setWish({})
+  }
+
   return (
     <tr className="group cursor-pointer">
       <td className="whitespace-nowrap px-4 py-2 flex justify-around items-center gap-1">
@@ -109,7 +109,7 @@ const TableRow = ({ myWish }: { myWish: Wish }) => {
         <input
           id="name"
           name="name"
-          value={myWish.name || ""}
+          value={isActive ? wish?.name : myWish.name || ""}
           onChange={handleChange}
           type="text"
           disabled={!isActive}
@@ -122,7 +122,7 @@ const TableRow = ({ myWish }: { myWish: Wish }) => {
         <input
           id="description"
           name="description"
-          value={myWish.description || ""}
+          value={isActive ? wish?.description : myWish.description || ""}
           onChange={handleChange}
           type="text"
           disabled={!isActive}
@@ -136,7 +136,7 @@ const TableRow = ({ myWish }: { myWish: Wish }) => {
           <input
             id="url"
             name="url"
-            value={myWish.url || ""}
+            value={isActive ? wish?.url : myWish.url || ""}
             onChange={handleChange}
             type="url"
             disabled={!isActive}
@@ -152,7 +152,7 @@ const TableRow = ({ myWish }: { myWish: Wish }) => {
         <span className="flex gap-4">
           <ArrowPathIcon
             className={`${isActive ? "block" : "hidden"} h-6  text-blue-900`}
-            onClick={updateWish}
+            onClick={handleUpdate}
           />
           <TrashIcon
             className={`${isActive ? "block" : "hidden"} h-6  text-red-700`}
@@ -160,7 +160,7 @@ const TableRow = ({ myWish }: { myWish: Wish }) => {
           />
           <XMarkIcon
             className={`${isActive ? "block" : "hidden"} h-6 `}
-            onClick={() => setIsActive(false)}
+            onClick={handleCancel}
           />
         </span>
       </td>
