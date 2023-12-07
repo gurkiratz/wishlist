@@ -1,4 +1,4 @@
-import { useRecoilState, useRecoilValue } from "recoil"
+import { useRecoilValue, useSetRecoilState } from "recoil"
 import { wishesData } from "../store/atoms/WishesData"
 import { Wish } from "../store/atoms/WishState"
 import React, { useEffect, useState } from "react"
@@ -13,7 +13,7 @@ import {
 
 const WishTable = () => {
   const wishes = useRecoilValue(wishesData)
-  const [open, setOpen] = useRecoilState(isOpenState)
+  const setOpen = useSetRecoilState(isOpenState)
 
   useEffect(() => {
     console.log(wishes)
@@ -57,7 +57,7 @@ const WishTable = () => {
 
 const TableRow = ({ myWish }: { myWish: Wish }) => {
   const [wish, setWish] = useState({} as Wish)
-  const [wishes, setWishes] = useRecoilState(wishesData)
+  const setWishes = useSetRecoilState(wishesData)
   const [isActive, setIsActive] = useState(false)
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {

@@ -1,13 +1,13 @@
 import { Fragment, useRef } from "react"
 import { Dialog, Transition } from "@headlessui/react"
-import { useRecoilState } from "recoil"
+import { useRecoilState, useSetRecoilState } from "recoil"
 import { isOpenState } from "../store/atoms/isOpenState"
 import { wishesData } from "../store/atoms/WishesData"
 import { wishState } from "../store/atoms/WishState"
 import { nanoid } from "nanoid"
 
 export default function Example() {
-  const [wishes, setWishes] = useRecoilState(wishesData)
+  const setWishes = useSetRecoilState(wishesData)
   const [wish, setWish] = useRecoilState(wishState)
   const [open, setOpen] = useRecoilState(isOpenState)
   const cancelButtonRef = useRef(null)
