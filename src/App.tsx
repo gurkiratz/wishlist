@@ -7,12 +7,15 @@ function App() {
     <RecoilRoot>
       <div className="py-2 px-4">
         <h1 className="text-3xl font-bold text-timberwolf-200">
-          Your Own Wishlist
+          Wishlistify{" "}
+          <span className="text-lg absolute ml-2">
+            (Your Personal Wishlist)
+          </span>
         </h1>
         <p className="">
           By{" "}
           <a
-            href="https://github.com/gurkiratz"
+            href="https://github.com/gurkiratz/wishlistify"
             target="_blank"
             className="underline"
           >
